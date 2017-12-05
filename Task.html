@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+h1 {
+    position:relative;
+	font-family: Source Sans Pro, Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    color: #e60000;
+	text-align:center;
+}
+body{
+    background-image:url("I.jpg");
+    background-repeat:no-repeat;
+}
+.time{
+	font-size:30px;
+	font-weight: bold;
+	font-family:Source Sans Pro, Arial, Helvetica, sans-serif;
+	position:relative;
+	left:80px;
+	top:10px;
+}
+.sound{
+	font-size:30px;
+	font-weight: bold;
+	font-family:Source Sans Pro, Arial, Helvetica, sans-serif;
+	position:relative;
+	left:700px;
+	bottom:330px;
+}
+.audiolayout{
+    background-color: #000000;
+    background-position:  top;
+    border: 3px black;
+    width: 150px;
+    height: 1px;
+    position:relative;
+    padding-top: 50px;
+    padding-right: .5px;
+    padding-bottom: 100px;
+    padding-left: 90px;
+    border-radius: 12px;
+    background-size: 100px 80px;
+    left:1000px;
+	bottom:450px;
+}
+.clocklayout{
+	bottom:120px;
+	left:320px;
+    background-color: #000000;
+    border: 3px black;
+    width: 150px;
+    height: 1px;
+    position:relative;
+    padding-top: 50px;
+    padding-right: .5px;
+    padding-bottom: 100px;
+    padding-left: 90px;
+    border-radius: 12px;
+}  
+.buttons{
+	top:115px;
+    font-size:20px;
+    position:absolute;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    padding:.5px;
+    color:white;
+    background-color:grey;
+    border:1px green;
+	box-shadow: 5px 10px 5px #000000;
+	cursor:pointer;
+}
+
+.timings{
+	padding:2px;
+	border:1px solid-grey;
+	font-size: 40px;
+    color: #e73a52;
+    width: 20px;
+    height: 65px;
+    display: inline-block;
+    text-shadow: 0 0 20px rgba(230, 58, 82, 0.8);
+    cursor: default;
+    top:20px;
+    transform: scale(2, 2);
+}
+.divider{
+	font-size: 40px;
+    color: #e73a52;
+    margin-left: 0px;
+    height: 55px;
+    display: inline-block;
+ 	bottom:5px;
+    left: 115px;
+    transform: scale(2, 2);
+}
+
+.alarmbuttons{
+	font-weight:bold;
+	position:relative;
+	background-color: red; 
+	border: none;
+	color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size:18px;
+    margin: 4px 2px;
+    cursor: pointer;
+	bottom:90px;
+}
+.nstime{
+	position:absolute;
+	top:.1px;
+	color:grey;
+}
+.rightarrows{
+	display:inline-block;
+	background-color:grey;
+	color:white;
+	left:10px; 
+	position:absolute;
+	bottom:65px;
+	border-radius: 3px;
+	border:1px grey;
+	cursor:pointer;
+}
+.leftarrows{
+	display:inline-block;
+	background-color:grey;
+	color:white;
+	left:210px;
+	position:absolute;
+	bottom:65px;
+	border-radius: 3px;
+	border:1px grey;
+	cursor:pointer;
+}
+.text{
+	display:inline-block;
+	font-style:Times New Roman;
+	font-size:20px;
+	color:white;
+	bottom:110px;
+	position:absolute;
+	left:90px;
+	}
+.images{
+	position:absolute;
+	left:20px;
+	border-radius:2px;
+}
+#audiolaybts{
+	position:absolute;
+	left:40px;
+	bottom:1px;
+	color:black;
+	background-color:grey;
+	border:1px solid grey;
+	border-radius:1px;
+	cursor:pointer;
+} 
+</style>
+</head>
+
+<body onload="start()">
+<div>
+	<h1 style= "bottom:60px;"> Kuku Klok</h1>
+	<h1 style= "bottom:120px;left:15px;font-size: 20px;color: #000000;"> Online alarm clock.Designed to wake you up.</h1>
+</div>
+
+<p class="time">Wake me up at:</p>
+<div class="clocklayout">
+	<p class="nstime" id="currenttime"></p>
+	<p class="timings" id="Hours" style="left:35px;position:absolute"></p>
+	<p class="divider" id="Divider" style="position:absolute">:</p>
+	<p class="timings" id="Minutes" style="left:140px;position:absolute"></p>
+	<br/>
+  <div >
+	<button style="left:30px;"  class="buttons" onclick="hoursplus()">+</button>
+	<button style="left:70px;"  class="buttons" onclick="hoursminus()">-</button>
+	<button style="left:150px;" class="buttons" onclick="minutesplus()">+</button>
+	<button style="left:190px;" class="buttons" onclick="minutesminus()">-</button>
+  </div>
+</div><br/><br/>
+<button  style="left:295px;" class="alarmbuttons" onclick="Startalarm()">SETALARM</button>
+<button  style="left:300px;" class="alarmbuttons" onclick="Stopalarm()">STOP</button>
+<p class="sound">with the sound of:</p>
+<audio id="myaudio.1"  >
+	<source src="christmas_bells.mp3" type="audio/mpeg">
+</audio>
+<div id="audiooverlay" class="audiolayout">
+     <button class="rightarrows" onclick="previous()"> < </button>
+     <p class="text" id="myP1">BELLS</p>
+	 <p style="position:absolute;left:70px;top:15px;"><image src="classic.jpg" width="100" height="80"></p>
+	 <button id="audiolaybts" onclick="play()"> Preview sound </button>
+	 <button id="audiolaybts" onclick="pause()"style="left:150px;"> Stop </button>
+     <button class="leftarrows" onclick="next()"> > </button>
+</div>
+
+<script>
+    function startTime(){
+	 var a = new Date();
+	 var b = a.getHours();
+	 var c = a.getMinutes();
+	 var d = a.getSeconds();
+		c = checkTime(c);
+		d = checkTime(d);
+        document.getElementById("currenttime").innerHTML= "current time is" + b + ":" + c + ":" + d;
+	 var t = setInterval(startTime, 500);
+}
+    function checkTime(i) {
+     if (i < 10){
+       i = "0" + i;
+    }
+       return i;
+}
+    function load(){
+	if ((localStorage.hours==null)&&(localStorage.minutes==null)){
+	alert("1");
+	document.getElementById("Hours").innerHTML="00";
+	document.getElementById("Minutes").innerHTML="00";
+	 }
+	else{
+	alert("2");
+	//window.localStorage.removeItem("hours");
+	//window.localStorage.removeItem("minutes");
+	document.getElementById("Hours").innerHTML=localStorage.hours;
+	document.getElementById("Minutes").innerHTML=localStorage.minutes;
+    } 
+ }   
+    function start(){
+       startTime();
+       load();
+       
+}
+    var clickh=0;
+   function hoursplus(){
+       clickh++;
+       clickh=checktime(clickh);
+    if(clickh==24){
+        clickh="00";
+    }
+        document.getElementById("Hours").innerHTML=  clickh;
+}
+
+    function hoursminus(){
+        clickh--;
+    if(clickh==-1) {
+        clickh=0;
+    }
+        clickh=checktime(clickh);
+        document.getElementById("Hours").innerHTML=clickh;
+}
+    var clickm=0;
+   function minutesplus(){
+       clickm++;
+       clickm=checktime(clickm);
+    if(clickm==60){
+       clickm="00";
+    }
+      document.getElementById("Minutes").innerHTML=clickm;
+}
+   function minutesminus(){
+     clickm--;
+    if(clickm==-1){
+     clickm=0;
+    }
+     clickm=checktime(clickm);
+     document.getElementById("Minutes").innerHTML=clickm;
+}
+
+   function checktime(i){ 
+    if(i < 10){
+      i = "0" + i;
+    }  
+      return i;
+}
+    var g;
+    var audio=document.getElementById("myaudio.1"); 
+   function Startalarm(){
+    var h=document.getElementById("Hours").innerHTML;
+	var m=document.getElementById("Minutes").innerHTML;
+	var a = new Date();
+    var b = a.getHours ();
+    var c = a.getMinutes ();
+	  g=setTimeout(Startalarm,5000);
+	   localStorage.setItem("hours",h);
+	  localStorage.setItem("minutes",m);
+	  if ((h==b) && (m==c)){
+	  audio.play();
+    }
+    else{
+     audio.pause();
+    }
+}
+    function Stopalarm(){
+       audio.pause();
+       clearTimeout(g);
+}
+      var p = document.getElementById("myaudio.1");
+    function play(){
+        p.play();
+}
+    function pause(){
+       p.pause();
+}
+</script>
+   </body>
+      </html>
+
+
